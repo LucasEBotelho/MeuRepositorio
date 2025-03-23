@@ -1,12 +1,14 @@
 import streamlit as st
-import pandas as pd
+import random
 
-df = pd.read_excel("dados.xlsx")  # Pandas usará openpyxl automaticamente
+st.title("Gerador de Números Aleatórios 🎲")
 
-st.title("Seleção de Territórios 📍")
+min_val = st.number_input("Valor mínimo", value=1, step=1)
+max_val = st.number_input("Valor máximo", value=100, step=1)
 
-bairro = st.selectbox("Escolha um Bairro:", df["Bairro"].unique())
-territorio = st.selectbox("Escolha um Território:", df["Territorio"].unique())
-quadra = st.selectbox("Escolha uma Quadra:", df["Quadras"].unique())
-
-st.write(f"📌 Você selecionou: **{bairro}**, **{territorio}**, **{quadra}**")
+if st.button("Gerar Número"):
+    if min_val < max_val:
+        num = random.randint(min_val, max_val)
+        st.success(f"Número sorteado: {num}")
+    else:
+        st.error("O valor mínimo deve ser menor que o máximo.")
